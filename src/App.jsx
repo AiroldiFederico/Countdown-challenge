@@ -1,12 +1,11 @@
 import { useState } from "react";
 import "./style/App.css";
+import Player from "./components/Player.jsx";
 
-function App() {
+export default function App() {
   return (
     <>
-      <p className="text-3xl font-bold">Ciao Federico!</p>
+      <Player />
     </>
   );
 }
-
-export default App;
