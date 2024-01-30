@@ -6,7 +6,7 @@ export default function Player() {
   let InputClass =
     "py-1 ps-2 block w-full  shadow-sm rounded-s-lg text-sm focus:outline-none disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600";
 
-  const playerName = useRef < HTMLInputElement > null;
+  const playerName = useRef();
   const [enteredPlayerName, setEnteredPlayerName] = useState("");
 
   function handleClick() {
