@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function Player() {
   let buttonClass =
@@ -6,16 +6,11 @@ export default function Player() {
   let InputClass =
     "py-1 ps-2 block w-full  shadow-sm rounded-s-lg text-sm focus:outline-none disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600";
 
-  const [enteredPlayerName, setEnteredPlayerName] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleChange(e) {
-    setSubmitted(false);
-    setEnteredPlayerName(e.target.value);
-  }
+  const playerName = useRef < HTMLInputElement > null;
+  const [enteredPlayerName, setEnteredPlayerName] = useState("");
 
   function handleClick() {
-    setSubmitted(true);
+    setEnteredPlayerName(playerName.current.value);
   }
 
   return (
@@ -27,18 +22,13 @@ export default function Player() {
         Stop the timer once you estimate that times is (almost) up
       </span>
 
-      <div className="mt-4 flex flex-col gap-4 text-xl text-emerald-600">
-        <label className="font-bold">
-          Welcome {submitted ? enteredPlayerName : "unknown entity"}
+      <div className="mt-4 flex flex-col gap-4 text-xl ">
+        <label className="font-bold text-teal-600">
+          Welcome {enteredPlayerName ?? "unknown entity"}
         </label>
         <div>
           <div className="flex rounded-lg shadow-sm">
-            <input
-              type="text"
-              className={InputClass}
-              onChange={handleChange}
-              value={enteredPlayerName}
-            />
+            <input type="text" className={InputClass} ref={playerName} />
             <button className={buttonClass} onClick={handleClick}>
               Set Name
             </button>
