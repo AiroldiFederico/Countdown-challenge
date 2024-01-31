@@ -17,14 +17,14 @@ export default function Player() {
 
   return (
     <section className="w-[48rem] h-auto bg-gray-950 rounded-lg mt-20 p-6 flex justify-top flex-col items-center shadow-xl">
-      <h1 className="font-black text-3xl">
+      <h1 className="font-black text-3xl ">
         THE <span className="text-blue-500">ALMOST</span> FINAL COUNT DOWN
       </h1>
       <span className="text-gray-500">
         Stop the timer once you estimate that times is (almost) up
       </span>
 
-      <div className="mt-4 flex flex-col gap-4 text-xl ">
+      <div className="mt-4 flex flex-col gap-4 text-xl items-center">
         <label className="font-bold text-teal-600">
           Welcome {enteredPlayerName ?? "unknown entity"}
         </label>
