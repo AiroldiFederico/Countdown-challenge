@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import TimerChallenge from "./TimerChallenge.jsx";
 
 export default function Player() {
   let buttonClass =
@@ -35,6 +36,13 @@ export default function Player() {
             </button>
           </div>
         </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-6 mt-12">
+        <TimerChallenge title={"Easy"} targetTime={1} />
+        <TimerChallenge title={"Not Easy"} targetTime={5} />
+        <TimerChallenge title={"Pretty Tough"} targetTime={10} />
+        <TimerChallenge title={"Pros only"} targetTime={15} />
       </div>
     </section>
   );
