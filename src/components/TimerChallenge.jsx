@@ -13,8 +13,11 @@ export default function TimerChallenge({ title, targetTime }) {
 
   if (timeRemaining <= 0) {
     clearInterval(timer.current);
-    setTimeRemaining(targetTime * 1000);
     dialog.current.open();
+  }
+
+  function handleReset() {
+    setTimeRemaining(targetTime * 1000);
   }
 
   function handleStart() {
@@ -25,12 +28,17 @@ export default function TimerChallenge({ title, targetTime }) {
 
   function handleStop() {
     dialog.current.open();
-    clearTimeout(timer.current);
+    clearInterval(timer.current);
   }
 
   return (
     <>
-      <ResultModal ref={dialog} targetTime={targetTime} result="lost" />
+      <ResultModal
+        ref={dialog}
+        targetTime={targetTime}
+        remainingTime={timeRemaining}
+        onReset={handleReset}
+      />
       <section className="bg-cyan-400 rounded p-6 flex flex-col items-center min-w-64">
         <h2 className="text-xl font-bold text-gray-900 uppercase">{title}</h2>
 
