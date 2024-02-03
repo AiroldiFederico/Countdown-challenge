@@ -33,6 +33,7 @@ export default function TimerChallenge({ title, targetTime }) {
 
   return (
     <>
+
       <ResultModal
         ref={dialog}
         targetTime={targetTime}
