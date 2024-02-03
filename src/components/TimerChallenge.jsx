@@ -5,19 +5,26 @@ export default function TimerChallenge({ title, targetTime }) {
   const timer = useRef();
   const dialog = useRef();
 
-  const [timerStarted, setTimerStarted] = useState(false);
-  const [timerExpired, setTimerExpired] = useState(false);
+  // const [timerStarted, setTimerStarted] = useState(false);
+  // const [timerExpired, setTimerExpired] = useState(false);
 
-  function handleStart() {
-    timer.current = setTimeout(() => {
-      setTimerExpired(true);
-      dialog.current.open();
-    }, targetTime * 1000);
+  const [timeRemaining, setTimeRemaining] = useState(targetTime * 1000);
+  const timerIsActive = timeRemaining > 0 && timeRemaining < targetTime * 1000;
 
-    setTimerStarted(true);
+  if (timeRemaining <= 0) {
+    clearInterval(timer.current);
+    setTimeRemaining(targetTime * 1000);
+    dialog.current.open();
   }
 
-  function handlestop() {
+  function handleStart() {
+    timer.current = setInterval(() => {
+      setTimeRemaining((prevTimerRemaining) => prevTimerRemaining - 10);
+    }, 10);
+  }
+
+  function handleStop() {
+    dialog.current.open();
     clearTimeout(timer.current);
   }
 
@@ -31,18 +38,18 @@ export default function TimerChallenge({ title, targetTime }) {
           {targetTime} second{targetTime > 1 ? "s" : ""}
         </p>
         <p className="my-6 bg-black py-1 px-2 rounded text-white">
-          <button onClick={timerStarted ? handlestop : handleStart}>
-            {timerStarted ? "Stop" : "Start"} Challenge
+          <button onClick={timerIsActive ? handleStop : handleStart}>
+            {timerIsActive ? "Stop" : "Start"} Challenge
           </button>
         </p>
         <p
           className={
-            timerStarted
+            timerIsActive
               ? "text-red-700 pulse font-semibold"
               : "text-gray-700 font-semibold"
           }
         >
-          {timerStarted ? "Time is running" : "Timer inactive"}
+          {timerIsActive ? "Time is running" : "Timer inactive"}
         </p>
       </section>
     </>
